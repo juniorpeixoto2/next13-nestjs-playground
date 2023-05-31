@@ -1,11 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import updateTodos from "@/services/todosServices/updateTodos";
+import { useRouter } from "next/navigation";
 import getByIdTodos from "@/services/todosServices/getByIdTodos";
+import deleteTodos from "@/services/todosServices/deleteTodos";
 
-export default function EditTodo({ params }: any) {
+export default function DeleteTodo({ params }: any) {
   const router = useRouter();
   const todoId = params.id;
 
@@ -39,7 +40,7 @@ export default function EditTodo({ params }: any) {
     event.preventDefault();
 
     try {
-      await updateTodos(todoId, formData);
+      await deleteTodos(todoId);
       router.push("/todos");
     } catch (error: any) {
       setError(error.message);
@@ -55,6 +56,7 @@ export default function EditTodo({ params }: any) {
           <div>
             <label htmlFor="">Titulo</label>
             <input
+              disabled
               type="text"
               required
               value={formData.title}
@@ -64,6 +66,7 @@ export default function EditTodo({ params }: any) {
           <div>
             <label htmlFor="">Descrição</label>
             <input
+              disabled
               type="text"
               value={formData.description}
               onChange={(e) => handleFormLogin(e, "description")}
@@ -72,7 +75,7 @@ export default function EditTodo({ params }: any) {
           <div>{error && <p>{error}</p>}</div>
 
           <div>
-            <input type="submit" value="Alterar" />
+            <input type="submit" value="Excluir" />
           </div>
         </form>
       </div>

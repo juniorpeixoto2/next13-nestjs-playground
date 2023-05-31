@@ -2,7 +2,7 @@
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import storeTodos from "@/lib/todos/storeTodos";
+import storeTodos from "@/services/todosServices/storeTodos";
 
 export default function NewTodo() {
   // console.log("todos/new", new Date());

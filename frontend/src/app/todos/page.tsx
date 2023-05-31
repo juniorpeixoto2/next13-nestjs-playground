@@ -1,5 +1,5 @@
 "use client";
-import getAllTodos from "@/lib/todos/getAllTodos";
+import getAllTodos from "@/services/todosServices/getAllTodos";
 import Link from "next/link";
 export default async function Todos() {
   const todos = await getAllTodos();
@@ -7,7 +7,7 @@ export default async function Todos() {
   return (
     <div>
       <div className="flex flex-row justify-between ">
-        <h1>Posts 2</h1>
+        <h1>Todos</h1>
         <Link
           className="border bg-blue-300 p-2 rounded shadow-sm"
           href="/todos/new"
@@ -43,7 +43,7 @@ export default async function Todos() {
                   </Link>
                   <Link
                     className="border bg-blue-300 p-1 rounded "
-                    href={`/todos/edit/${todo.id}`}
+                    href={`/todos/delete/${todo.id}`}
                   >
                     Deletar
                   </Link>
