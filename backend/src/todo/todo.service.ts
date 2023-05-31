@@ -21,11 +21,23 @@ export class TodoService {
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} todo`;
+    return this.prisma.todos.findUniqueOrThrow({
+      where: {
+        id,
+      },
+    });
   }
 
   update(id: number, updateTodoDto: UpdateTodoDto) {
-    return `This action updates a #${id} todo`;
+    return this.prisma.todos.update({
+      where: {
+        id,
+      },
+      data: {
+        title: updateTodoDto.title,
+        description: updateTodoDto.description,
+      },
+    });
   }
 
   remove(id: number) {

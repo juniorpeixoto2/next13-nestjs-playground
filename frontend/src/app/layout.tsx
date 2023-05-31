@@ -27,16 +27,10 @@ export default function RootLayout({
               <Link href="/cadastro">Cadastro</Link>
             </li>
             <li>
-              <Link href="/posts">Posts</Link>
-            </li>
-            <li>
               <Link href="/login">Login</Link>
             </li>
             <li>
               <Link href="/todos">Todos</Link>
-            </li>
-            <li>
-              <Link href="/tags">Tags</Link>
             </li>
           </ul>
         </div>

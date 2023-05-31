@@ -1,6 +1,6 @@
-export default async function storeTodos(data: any) {
-  await fetch(`${process.env.URL_API}/todos`, {
-    method: "POST",
+export default async function updateTodos(id: string, data: any) {
+  await fetch(`${process.env.URL_API}/todos/${id}`, {
+    method: "PATCH",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
