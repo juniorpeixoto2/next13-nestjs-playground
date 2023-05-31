@@ -1,30 +1,28 @@
-async function getData() {
-  const res = await fetch("http://localhost:3001/todos");
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+"use client";
+import getAllTodos from "@/lib/todos/getAllTodos";
+import axios from "axios";
+import Link from "next/link";
 
-  // console.log(res.json);
+async function fetchPosts() {
+  const response = await axios.get("http://localhost:3001/todos");
+  console.log(response.data);
 
-  // Recommendation: handle errors
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
-  }
-
-  return res.json();
+  return response.data;
 }
-
-export default async function about() {
-  const data = await getData();
+export default async function Todos() {
+  const data = await getAllTodos();
 
   return (
     <div>
-      <h1>Todos: </h1>
-      <div>
-        {data.map((data: any) => (
-          <li key={data.id}>{data.title}</li>
+      <h1>Posts 2</h1>
+      <Link href="/todos/new">Cadastrar</Link>
+      <ul>
+        {data.map((post: any) => (
+          <li key={post.id}>
+            <h2>{post.title}</h2>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 }

@@ -2,9 +2,10 @@
 import { NextResponse } from "next/server";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { login } from "@/services/auth";
 // import { setCookie } from "cookies-next";
 
-export default function cadastro() {
+export default function Login() {
   const router = useRouter();
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
@@ -25,7 +26,7 @@ export default function cadastro() {
     event.preventDefault();
 
     try {
-      // const response = await fetch("/auth/login", {
+      // const response = await fetch("http://localhost:3001/auth/login", {
       //   method: "POST",
       //   body: JSON.stringify(formData),
       // });
@@ -34,8 +35,9 @@ export default function cadastro() {
       // nextResponse.cookies.set("authorization", json);
       // return NextResponse.redirect(new URL("/new", request.url));
       // console.log(response, json);
+      // router.push("/client");
 
-      router.push("/client");
+      await login(formData);
     } catch (err: any) {
       setError(err.message);
     }

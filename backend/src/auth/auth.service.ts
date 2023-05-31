@@ -29,7 +29,7 @@ export class AuthService {
     }
 
     if (user?.password !== pass) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException('E-mail e/ou Senha Incorretos.');
     }
     const payload = { sub: user.id, username: user.email };
 
