@@ -1,8 +1,19 @@
 "use client";
 import getAllTodos from "@/services/todosServices/getAllTodos";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 export default async function Todos() {
-  const todos = await getAllTodos();
+  const [todos, setTodos] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const todos = await getAllTodos();
+
+      setTodos(todos);
+    };
+
+    fetchData().catch(console.error);
+  });
 
   return (
     <div>

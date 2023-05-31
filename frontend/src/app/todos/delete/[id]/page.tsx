@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import updateTodos from "@/services/todosServices/updateTodos";
 import { useRouter } from "next/navigation";
 import getByIdTodos from "@/services/todosServices/getByIdTodos";
 import deleteTodos from "@/services/todosServices/deleteTodos";
