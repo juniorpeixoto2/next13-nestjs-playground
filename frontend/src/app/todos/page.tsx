@@ -2,18 +2,9 @@
 import getAllTodos from "@/services/todosServices/getAllTodos";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+
 export default async function Todos() {
-  const [todos, setTodos] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const todos = await getAllTodos();
-
-      setTodos(todos);
-    };
-
-    fetchData().catch(console.error);
-  });
+  const todos = await getAllTodos();
 
   return (
     <div>
@@ -64,7 +55,6 @@ export default async function Todos() {
           </tbody>
         </table>
       </div>
-      <ul></ul>
     </div>
   );
 }
