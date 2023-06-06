@@ -18,6 +18,8 @@ export class AuthService {
   }
 
   async signIn(email, pass) {
+    console.log(email, pass);
+
     const user = await this.prisma.users.findFirst({
       where: {
         email,
@@ -31,10 +33,10 @@ export class AuthService {
     if (user?.password !== pass) {
       throw new UnauthorizedException('E-mail e/ou Senha Incorretos.');
     }
-    const payload = { sub: user.id, username: user.email };
+    const payload = { sub: user.id, username: user.email, role: 'admin' };
 
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      access_token: await this.jwtService.sign(payload),
     };
   }
 }
