@@ -1,3 +1,5 @@
+import { api } from "../api";
+
 export default async function storeTodos(data: any) {
   await fetch(`${process.env.URL_API}/todos`, {
     method: "POST",

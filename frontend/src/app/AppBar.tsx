@@ -1,39 +1,38 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+"use client";
 import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import { AuthContext } from "@/contexts/authContext";
+import React, { useContext } from "react";
 
 const AppBar = () => {
-  const { data: session } = useSession();
-  // console.log({ session });
+  const router = useRouter();
+  const { signOut } = useContext(AuthContext);
+  async function handleSignOut() {
+    await signOut();
+    router.refresh();
+    router.push("/");
+    try {
+    } catch (error) {}
+  }
 
   return (
     <div className="bg-gradient-to-b from-cyan-50 to-cyan-200 p-2 flex gap-5 ">
       <Link className="text-sky-600 hover:text-sky-700" href={"/"}>
         Home
       </Link>
+      <Link className="text-sky-600 hover:text-sky-700" href={"/login"}>
+        Login
+      </Link>
       <Link className="text-sky-600 hover:text-sky-700" href="/todos">
         Todos
       </Link>
-      <Link className="text-sky-600 hover:text-sky-700" href={"/admin/panel"}>
-        Admin Panel
+      <Link className="text-sky-600 hover:text-sky-700" href={"/client"}>
+        Painel Cliente
       </Link>
-      <Link className="text-sky-600 hover:text-sky-700" href={"/user"}>
-        User Panel
-      </Link>
+      <button onClick={handleSignOut}>Sair</button>
 
       <div className="ml-auto flex gap-2">
-        {session?.user ? (
-          <>
-            <p className="text-sky-600"> {session.user.name}</p>
-            <button className="text-red-500" onClick={() => signOut()}>
-              Sign Out
-            </button>
-          </>
-        ) : (
-          <button className="text-green-600" onClick={() => signIn()}>
-            Sign In
-          </button>
-        )}
+        <p className="text-sky-600"> name</p>
       </div>
     </div>
   );

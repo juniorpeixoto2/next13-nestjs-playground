@@ -1,14 +1,14 @@
 "use client";
-import { NextResponse } from "next/server";
+import { api } from "@/services/api";
+import { useEffect } from "react";
 
-export default function dashboard() {
-  return <div>Client Dashboard</div>;
+export default function Client() {
+  useEffect(() => {
+    // console.log("Client");
+    // api.get("/todos").then((response) => {
+    //   console.log(response.data);
+    // });
+  });
+
+  return <div>Client Panel</div>;
 }
-
-// export const getServerSideProps = async (req: any, res: any) => {
-//   let nextResponse = NextResponse.next();
-//   try {
-//     const token = nextResponse.cookies.get("authorization");
-//     console.log(token);
-//   } catch (error) {}
-// };
