@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   async signIn(email, pass) {
-    console.log(email, pass);
+    // console.log(email, pass);
 
     const user = await this.prisma.users.findFirst({
       where: {

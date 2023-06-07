@@ -32,7 +32,6 @@ export default function NewTodo() {
 
       router.refresh();
       router.push("/client");
-      console.log(token);
     } catch (error: any) {
       setError(error.message);
     }
