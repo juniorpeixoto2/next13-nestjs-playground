@@ -2,19 +2,16 @@
 import React from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useContext } from "react";
 import storeTodos from "@/services/todosServices/storeTodos";
-import { AuthContext } from "@/contexts/authContext";
 
 export default function NewTodo() {
   // console.log("todos/new", new Date());
-  const context = useContext(AuthContext);
 
   const router = useRouter();
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    title: "",
+    description: "",
   });
 
   const handleFormLogin = (event: any, name: string) => {
@@ -28,11 +25,8 @@ export default function NewTodo() {
     event.preventDefault();
 
     try {
-      const token = await context.signIn(formData);
-
-      router.refresh();
-      router.push("/client");
-      console.log(token);
+      await storeTodos(formData);
+      router.push("/client/todos");
     } catch (error: any) {
       setError(error.message);
     }
@@ -40,24 +34,24 @@ export default function NewTodo() {
 
   return (
     <div>
-      <h3>Entrar</h3>
+      <h3>Novo To Do</h3>
       <div>
         <form onSubmit={handleForm} className="flex flex-col gap-2">
           <div>
-            <label htmlFor="">E-mail</label>
+            <label htmlFor="">Titulo</label>
             <input
               type="text"
               required
-              value={formData.email}
-              onChange={(e) => handleFormLogin(e, "email")}
+              value={formData.title}
+              onChange={(e) => handleFormLogin(e, "title")}
             />
           </div>
           <div>
-            <label htmlFor="">Senha</label>
+            <label htmlFor="">Descrição</label>
             <input
-              type="password"
-              value={formData.password}
-              onChange={(e) => handleFormLogin(e, "password")}
+              type="text"
+              value={formData.description}
+              onChange={(e) => handleFormLogin(e, "description")}
             />
           </div>
           <div>{error && <p>{error}</p>}</div>

@@ -12,7 +12,7 @@ export default async function Todos() {
         <h1>Todos</h1>
         <Link
           className="border bg-blue-300 p-2 rounded shadow-sm"
-          href="/todos/new"
+          href="/client/todos/new"
         >
           Cadastrar
         </Link>
@@ -39,13 +39,13 @@ export default async function Todos() {
                 <td>
                   <Link
                     className="border bg-blue-300 p-1 rounded"
-                    href={`/todos/edit/${todo.id}`}
+                    href={`/client/todos/edit/${todo.id}`}
                   >
                     Editar
                   </Link>
                   <Link
                     className="border bg-blue-300 p-1 rounded "
-                    href={`/todos/delete/${todo.id}`}
+                    href={`/client/todos/delete/${todo.id}`}
                   >
                     Deletar
                   </Link>

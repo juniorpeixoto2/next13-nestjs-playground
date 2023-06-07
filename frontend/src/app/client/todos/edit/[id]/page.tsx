@@ -40,7 +40,7 @@ export default function EditTodo({ params }: any) {
 
     try {
       await updateTodos(todoId, formData);
-      router.push("/todos");
+      router.push("/client/todos");
     } catch (error: any) {
       setError(error.message);
     }

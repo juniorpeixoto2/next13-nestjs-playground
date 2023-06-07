@@ -1,18 +1,32 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import storeTodos from "@/services/todosServices/storeTodos";
+import getByIdTodos from "@/services/todosServices/getByIdTodos";
+import deleteTodos from "@/services/todosServices/deleteTodos";
 
-export default function NewTodo() {
-  // console.log("todos/new", new Date());
-
+export default function DeleteTodo({ params }: any) {
   const router = useRouter();
+  const todoId = params.id;
+
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     title: "",
     description: "",
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const todo = await getByIdTodos(todoId);
+
+      setFormData({
+        title: todo.title,
+        description: todo.description,
+      });
+    };
+
+    fetchData().catch(console.error);
+  }, []);
 
   const handleFormLogin = (event: any, name: string) => {
     setFormData({
@@ -25,8 +39,8 @@ export default function NewTodo() {
     event.preventDefault();
 
     try {
-      await storeTodos(formData);
-      router.push("/todos");
+      await deleteTodos(todoId);
+      router.push("/client/todos");
     } catch (error: any) {
       setError(error.message);
     }
@@ -34,12 +48,14 @@ export default function NewTodo() {
 
   return (
     <div>
+      <h1>Users {params.id}</h1>
       <h3>Novo To Do</h3>
       <div>
         <form onSubmit={handleForm} className="flex flex-col gap-2">
           <div>
             <label htmlFor="">Titulo</label>
             <input
+              disabled
               type="text"
               required
               value={formData.title}
@@ -49,6 +65,7 @@ export default function NewTodo() {
           <div>
             <label htmlFor="">Descrição</label>
             <input
+              disabled
               type="text"
               value={formData.description}
               onChange={(e) => handleFormLogin(e, "description")}
@@ -57,7 +74,7 @@ export default function NewTodo() {
           <div>{error && <p>{error}</p>}</div>
 
           <div>
-            <input type="submit" value="Cadastrar" />
+            <input type="submit" value="Excluir" />
           </div>
         </form>
       </div>
